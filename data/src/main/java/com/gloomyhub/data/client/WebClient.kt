@@ -9,13 +9,15 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
+import io.ktor.client.engine.cio.*
 import io.ktor.http.*
-import javax.inject.Inject
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlin.time.ExperimentalTime
+
 
 class WebClientException(val statusCode: HttpStatusCode) : Exception()
 
-class WebClient @Inject constructor(){
+class WebClient{
 
     @ExperimentalTime
     suspend inline fun <reified T : Any> makeClientGet(endpoint: String, apiType: ApiType): ApiResponse<T> {
@@ -49,15 +51,23 @@ class WebClient @Inject constructor(){
     }
 
     @ExperimentalTime
+    @ExperimentalSerializationApi
     @PublishedApi
     internal fun getClient(httpResponse: (HttpStatusCode) -> Unit): HttpClient {
-        return HttpClient() {
+        return HttpClient(CIO) {
+
+            install(HttpTimeout) {
+                requestTimeoutMillis = 6000
+            }
+
             install(JsonFeature) {
                 serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
                     ignoreUnknownKeys = true
-                    explicitNulls = true
+                    explicitNulls = false
                 })
             }
+
+
             install(Logging) {
                 logger = Logger.DEFAULT
                 level = LogLevel.ALL

@@ -1,6 +1,5 @@
 plugins {
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization")
@@ -35,8 +34,10 @@ android {
 
 dependencies {
     //di
-    implementation("com.google.dagger:hilt-android:${Versions.hilt}")
-    kapt ("com.google.dagger:hilt-compiler:${Versions.hilt}")
+    implementation ("io.insert-koin:koin-android:${Versions.koin}")
+    implementation ("io.insert-koin:koin-ktor:${Versions.koin}")
+    // SLF4J Logger
+    implementation ("io.insert-koin:koin-logger-slf4j:${Versions.koin}")
 
     implementation("io.ktor:ktor-client-core:${Versions.ktor}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}")
@@ -44,6 +45,8 @@ dependencies {
     implementation("io.ktor:ktor-client-json:${Versions.ktor}")
     implementation("io.ktor:ktor-client-logging:${Versions.ktor}")
     implementation("io.ktor:ktor-client-serialization:${Versions.ktor}")
+    implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
+
 
     implementation("androidx.core:core-ktx:1.7.0")
     testImplementation("junit:junit:4.13.2")

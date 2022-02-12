@@ -4,13 +4,12 @@ package com.gloomyhub.domain.horror_search
 import com.gloomyhub.data.response.ApiResponse
 import com.gloomyhub.data.response.ErrorResponse
 import com.gloomyhub.domain.horror_search.model.BookItem
-import javax.inject.Inject
 
 interface HorrorSearchRepo {
     suspend fun getHorrorBooks(): ApiResponse<List<BookItem>>
 }
 
-class HorrorSearchRepoImpl @Inject constructor(private val api: HorrorSearchApi) : HorrorSearchRepo {
+class HorrorSearchRepoImpl constructor(private val api: HorrorSearchApi) : HorrorSearchRepo {
     override suspend fun getHorrorBooks(): ApiResponse<List<BookItem>> {
         val result = api.getSuggestions()
         if (!result.success) {

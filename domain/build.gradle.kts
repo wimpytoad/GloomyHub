@@ -1,6 +1,5 @@
 plugins {
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization")
@@ -35,8 +34,7 @@ android {
 
 dependencies {
     //di
-    implementation("com.google.dagger:hilt-android:${Versions.hilt}")
-    kapt ("com.google.dagger:hilt-compiler:${Versions.hilt}")
+    implementation ("io.insert-koin:koin-android:${Versions.koin}")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
