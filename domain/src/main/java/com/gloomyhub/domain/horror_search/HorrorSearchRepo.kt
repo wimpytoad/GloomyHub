@@ -3,18 +3,27 @@ package com.gloomyhub.domain.horror_search
 
 import com.gloomyhub.data.response.ApiResponse
 import com.gloomyhub.data.response.ErrorResponse
-import com.gloomyhub.domain.horror_search.entity.BookshelfEntity
+import com.gloomyhub.domain.horror_search.model.BookItem
 import javax.inject.Inject
 
 interface HorrorSearchRepo {
-    suspend fun getHorrorBooks(): ApiResponse<BookshelfEntity>
+    suspend fun getHorrorBooks(): ApiResponse<List<BookItem>>
 }
 
 class HorrorSearchRepoImpl @Inject constructor(private val api: HorrorSearchApi) : HorrorSearchRepo {
-    override suspend fun getHorrorBooks(): ApiResponse<BookshelfEntity> {
+    override suspend fun getHorrorBooks(): ApiResponse<List<BookItem>> {
         val result = api.getSuggestions()
-        return if (result.success) result else ApiResponse(false,
-            null,
-            ErrorResponse("Could not get books", 0))
+        if (!result.success) {
+            return ApiResponse(false,
+                null,
+                ErrorResponse("Could not get books", 0))
+        }
+        val tranformedResult = mutableListOf<BookItem>()
+
+        result.data?.items?.forEach { item ->
+            tranformedResult.add(BookItem.map(item))
+        }
+
+        return ApiResponse(true, tranformedResult, null)
     }
 }

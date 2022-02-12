@@ -1,7 +1,5 @@
 package com.gloomyhub.data.response
 
-
-import com.toadfrogson.gloomyhub.response.ErrorResponse
 import kotlinx.serialization.Serializable
 
 data class ApiResponse<T>(
