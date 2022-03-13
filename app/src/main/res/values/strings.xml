@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GloomyHub</string>
+
+    <string name="book_screen_title">Books</string>
+    <string name="movie_screen_title">Movies</string>
+
 </resources>
