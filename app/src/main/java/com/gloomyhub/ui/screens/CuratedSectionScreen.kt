@@ -26,9 +26,10 @@ fun CuratedSectionScreen(
     Scaffold(bottomBar = {
         BottomNavBar(navController = navController)
     }) {
-        LazyColumn(modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()) {
             itemsIndexed(bookList.value) { index, item ->
                 BookListItem(bookItem = item, onClick = {
 

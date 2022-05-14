@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.gloomyhub.ui.components.MovieListItem
 import com.gloomyhub.ui.navigation.BottomNavBar
 import com.gloomyhub.vms.CuratedMoviesViewModel
 import org.koin.androidx.compose.getViewModel
@@ -21,7 +22,7 @@ fun CuratedMoviesScreen(
     navController: NavController
 ) {
 
-    val bookList = viewModel.suggestionsState.collectAsState()
+    val movieList = viewModel.suggestionsState.collectAsState()
 
     Scaffold(bottomBar = {
         BottomNavBar(navController = navController)
@@ -31,8 +32,8 @@ fun CuratedMoviesScreen(
                 .fillMaxWidth()
                 .wrapContentHeight()
         ) {
-            itemsIndexed(bookList.value) { index, item ->
-
+            itemsIndexed(movieList.value) { index, item ->
+                MovieListItem(movieItem = item, onClick = {})
             }
         }
     }
