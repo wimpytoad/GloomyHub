@@ -11,14 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.gloomyhub.ui.components.BookListItem
 import com.gloomyhub.ui.navigation.BottomNavBar
-import com.gloomyhub.vms.CuratedSectionViewModel
+import com.gloomyhub.vms.CuratedBooksViewModel
 import org.koin.androidx.compose.getViewModel
 
 const val curatedBooksRoute = "curated_books_route"
 
 @Composable
 fun CuratedSectionScreen(
-    viewModel: CuratedSectionViewModel = getViewModel(),
+    viewModel: CuratedBooksViewModel = getViewModel(),
     navController: NavController) {
 
     val bookList = viewModel.suggestionsState.collectAsState()

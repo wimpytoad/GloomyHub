@@ -2,14 +2,14 @@ package com.gloomyhub.vms
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gloomyhub.domain.horror_search.HorrorSearchRepo
-import com.gloomyhub.domain.horror_search.model.BookItem
+import com.gloomyhub.domain.movie_feed.MovieFeedRepo
+import com.gloomyhub.domain.movie_feed.model.MovieItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class CuratedSectionViewModel (private val repo: HorrorSearchRepo) : ViewModel() {
+class CuratedMoviesViewModel(private val repo: MovieFeedRepo) : ViewModel() {
 
-    val suggestionsState = MutableStateFlow<List<BookItem>>(emptyList())
+    val suggestionsState = MutableStateFlow<List<MovieItem>>(emptyList())
 
     init {
         getSuggestions()
@@ -17,9 +17,8 @@ class CuratedSectionViewModel (private val repo: HorrorSearchRepo) : ViewModel()
 
     private fun getSuggestions() {
         viewModelScope.launch {
-            val result = repo.getHorrorBooks()
+            val result = repo.getHorrorMovies()
             suggestionsState.emit(result.data.orEmpty())
-
         }
     }
 }

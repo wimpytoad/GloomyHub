@@ -9,28 +9,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.gloomyhub.ui.components.BookListItem
 import com.gloomyhub.ui.navigation.BottomNavBar
-import com.gloomyhub.vms.CuratedSectionViewModel
+import com.gloomyhub.vms.CuratedMoviesViewModel
 import org.koin.androidx.compose.getViewModel
 
 const val curatedMoviesRoute = "curated_movies_route"
 
 @Composable
-fun CuratedMoviesScreen(viewModel: CuratedSectionViewModel = getViewModel(), navController: NavController) {
+fun CuratedMoviesScreen(
+    viewModel: CuratedMoviesViewModel = getViewModel(),
+    navController: NavController
+) {
 
     val bookList = viewModel.suggestionsState.collectAsState()
 
     Scaffold(bottomBar = {
         BottomNavBar(navController = navController)
     }) {
-        LazyColumn(modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
             itemsIndexed(bookList.value) { index, item ->
-                BookListItem(bookItem = item, onClick = {
 
-                })
             }
         }
     }

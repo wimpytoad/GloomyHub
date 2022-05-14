@@ -17,12 +17,12 @@ class HorrorSearchRepoImpl constructor(private val api: HorrorSearchApi) : Horro
                 null,
                 ErrorResponse("Could not get books", 0))
         }
-        val tranformedResult = mutableListOf<BookItem>()
+        val transformedResult = mutableListOf<BookItem>()
 
         result.data?.items?.forEach { item ->
-            tranformedResult.add(BookItem.map(item))
+            transformedResult.add(BookItem.map(item))
         }
 
-        return ApiResponse(true, tranformedResult, null)
+        return ApiResponse(true, transformedResult, null)
     }
 }

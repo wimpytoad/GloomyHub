@@ -24,7 +24,7 @@ class WebClient{
 
         val url = when (apiType) {
             ApiType.GOOGLE_BOOKS -> BaseUrls.googleBooksBaseUrl + endpoint
-            ApiType.MANGAFOX -> BaseUrls.mangaFoxBaseUrl + endpoint
+            ApiType.MOVIE_BASE -> BaseUrls.movieBaseUrl + endpoint
         }
 
         try {
