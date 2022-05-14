@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
@@ -18,6 +19,8 @@ import coil.compose.rememberImagePainter
 import com.gloomyhub.R
 import com.gloomyhub.domain.horror_search.model.BookItem
 import com.gloomyhub.domain.horror_search.model.Cover
+import com.gloomyhub.ui.theme.BrownLight
+import com.gloomyhub.ui.theme.TextDark
 
 @Composable
 fun BookListItem(bookItem: BookItem, onClick: (item: BookItem) -> Unit) {
@@ -29,7 +32,7 @@ fun BookListItem(bookItem: BookItem, onClick: (item: BookItem) -> Unit) {
             bottom = containerPadding,
             start = sidePadding,
             end = sidePadding)
-        .background(MaterialTheme.colors.error)
+        .background(BrownLight)
         .clickable {
             onClick(bookItem)
         }) {
@@ -37,14 +40,14 @@ fun BookListItem(bookItem: BookItem, onClick: (item: BookItem) -> Unit) {
         Row() {
             Image(painter = rememberImagePainter("https://static.wixstatic.com/media/e9e4bf_ef1d9e5523854628bb8d0ee9a239ae73~mv2.jpg/v1/fit/w_603%2Ch_939%2Cal_c%2Cq_80/file.jpg"),
                 contentDescription = null,
-                Modifier.weight(1.0f).size (128.dp),
+                Modifier.weight(1.0f),
                 contentScale = ContentScale.Fit)
 
             Column(modifier = Modifier.weight(2.0f).padding(sidePadding)) {
 
                 Text(text = bookItem.authors[0],
                     textAlign = TextAlign.Start,
-                    color = MaterialTheme.colors.primary,
+                    color = TextDark,
                     style = MaterialTheme.typography.body1)
 
                 Spacer(modifier = Modifier.size(sidePadding))
@@ -52,7 +55,7 @@ fun BookListItem(bookItem: BookItem, onClick: (item: BookItem) -> Unit) {
                 Text(text = bookItem.description,
                     textAlign = TextAlign.Start,
                     color = MaterialTheme.colors.primary,
-                    style = MaterialTheme.typography.body1)
+                    style = MaterialTheme.typography.body2)
             }
         }
     }
